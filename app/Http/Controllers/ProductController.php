@@ -39,8 +39,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request = $this->request();
-        dd($request);
+        $data = $request->all();
+
+        $message = [
+            'name.required' => "Campo Nome é obrigatório.",
+            'description.required' => "Campo Descrição é obrigatório.",
+            'price.required' => "Campo Preço é obrigatório."
+        ];
+
+        $this->validate($request, [
+            'name' => "required|max:200",
+            'description' => 'required|min:3',
+            'price' => 'required'
+        ], $message);
+
+        $product = Product::create($data);
+
+        if (!$product) {
+            return redirect()
+                ->route('products.creaate')
+            ->with('message', 'Produto não pode ser criado. Tente novamente. Caso o erro persista, entre em contato com o suporte');
+        }
+
+        return redirect()
+            ->route('dashboard')
+        ->with('message', 'Produto criado com sucesso!');
     }
 
     /**
@@ -62,7 +85,16 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        if (!$product) {
+           return redirect()
+                ->route('products.index')
+            ->with('message', 'Produto não encontrado!');
+        }
+
+        $data['product'] = $product;
+        // dd($product, $product->id, $product->name, $product->description, $product->price);
+        return view('pages.products.edit', $data);
+
     }
 
     /**
@@ -74,7 +106,37 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->all();
+
+        $message = [
+            'name.required' => "Campo Nome é obrigatório.",
+            'description.required' => "Campo Descrição é obrigatório.",
+            'price.required' => "Campo Preço é obrigatório."
+        ];
+
+        $this->validate($request, [
+            'name' => "required|max:200",
+            'description' => 'required|min:3',
+            'price' => 'required'
+        ], $message);
+
+        if (!empty($data['name']) && !empty($data['description']) && !empty($data['price'])) {
+            $result = $product->fill($data)->save();
+
+            if ($result) {
+                return redirect()
+                    ->route('products.index')
+                ->with('message', 'Produto Atualizado com Sucesso!');
+            }
+
+            return redirect()
+                ->route('products.edit', $product->id)
+            ->with('message', 'Produto não pode ser atualziado. Por favor, tente novamente. Caso o erro persista, entre em contato com o suporte.');
+        }
+
+        return redirect()
+            ->route('products.edit', $product->id)
+        ->with('message', 'Ocorreu um erro ao recuperar o produto. Tente novamente. Caso o erro persista, entre em contato com o suporte.');
     }
 
     /**

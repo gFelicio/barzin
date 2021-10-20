@@ -33,7 +33,11 @@
                     {{ $header }}
                 </div>
             </header>
-
+            @if(session('message'))
+                <div class="message-error--primary">
+                    {{ session('message') }}
+                </div>
+            @endif
             <!-- Page Content -->
             <main>
                 {{ $slot }}

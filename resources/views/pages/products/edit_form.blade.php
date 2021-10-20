@@ -1,6 +1,7 @@
 <form class="form"
-    action="{{ route('products.store') }}"
+    action="{{ route('products.update', $product) }}"
     method="POST">
+    @method('PUT')
     @csrf
 
     <div class="form__group">
@@ -13,13 +14,15 @@
             name="name"
             id="name"
             placeholder="Nome do Produto"
-            autocomplete="off">
+            autocomplete="off"
+            value="{{ $product->name }}">
 
         @if ($errors->has('name'))
             <span class="badge--primary">
                 {{ $errors->first('name') }}
             </span>
         @endif
+
     </div>
 
     <div class="form__group">
@@ -27,13 +30,14 @@
             class="form__group--label">
             Descrição do produto
         </label>
-        <textarea class="form__group--input" name="description" id="description"></textarea>
+        <textarea class="form__group--input" name="description" id="description">{{ $product->description }}</textarea>
 
         @if ($errors->has('description'))
             <span class="badge--primary">
                 {{ $errors->first('description') }}
             </span>
         @endif
+
     </div>
 
     <div class="form__group">
@@ -47,7 +51,8 @@
             name="price"
             id="price"
             placeholder="Preço do Produto"
-            autocomplete="off">
+            autocomplete="off"
+            value="{{ $product->price }}">
 
         @if ($errors->has('price'))
             <span class="badge--primary">

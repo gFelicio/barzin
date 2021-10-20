@@ -58,6 +58,24 @@ header > div {
     margin: 10px;
 }
 
+.paginate-card__body--link {
+    display: flex;
+    justify-content: space-around;
+    background-color: lightgrey;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 0 5px 0;
+    font-weight: 900;
+}
+
+a.paginate-card__body--link:hover {
+    background-color: #aba9a9;
+}
+
+a.paginate-card__body--link:active {
+    background-color: #999898;
+}
+
 .empty-card {
     display: flex;
     width: auto;
@@ -68,6 +86,53 @@ header > div {
     justify-content: space-evenly;
     text-transform: capitalize;
     border-radius: 6px;
+}
+
+.wrapper-product-card {
+    max-width:  33%;
+}
+
+.product-card {
+    display: flex;
+    margin: 0 10px 5px 10px;
+    padding: 10px;
+    flex-flow: column;
+/*    min-width: 25%;
+    max-width: 30%;*/
+    border: 1px solid transparent;
+    background-color: #85a0a9;
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 0px rgb(0 0 1 / 55%);
+}
+
+.product-card:hover {
+    background-color: #6f848b;
+}
+
+.product-card:active {
+    background-color: #5e6e74;
+}
+
+.product-card--name {
+    color: white;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 3px;
+    font-size: 1.3rem;
+}
+
+.product-card--description {
+    padding: 0 10px 0 0;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.product-card--price {
+    align-self: end;
+    padding: 0 15px 0 0;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .form {
@@ -143,4 +208,28 @@ input[type=number] {
 
 button.form__group__button--submit:active {
     background-color: #366e36;
+}
+
+.message-error {
+    display: flex;
+    justify-content: center;
+    margin: 5px 30px;
+    padding: 5px 10px;
+    background-color:  red;
+    border-radius: 6px;
+    color: white;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+.message-error--primary {
+    display: flex;
+    justify-content: center;
+    margin: 5px 30px;
+    padding: 5px 10px;
+    background-color: cadetblue;
+    border-radius: 6px;
+    color: white;
+    font-weight: 900;
+    text-transform: capitalize;
 }

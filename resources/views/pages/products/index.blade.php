@@ -12,7 +12,9 @@
 
     <div class="py-12">
         @forelse ($products as $product)
-            okokok
+        <div class="canva">
+            @include('components.product_card')
+        </div>
         @empty
             @include('components.empty_card');
         @endforelse

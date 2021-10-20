@@ -24,7 +24,16 @@
                 <div class="paginate-card__body">
                     @forelse ($products as $product)
                         <div class="paginate-card__body--item">
-
+                            <a class="paginate-card__body--link"
+                                href="{{ route('products.edit',$product->id) }}">
+                                {{ $product->name }}
+                                <span>
+                                    -
+                                </span>
+                                <span>
+                                    R$ {{ $product->price }}
+                                </span>
+                            </a>
                         </div>
                     @empty
                         <div class="paginate-card__body--empty">
